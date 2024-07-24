@@ -46,11 +46,12 @@ Design and implement a web application that allows users to upload an image and 
 1. **Clone the repository**:
     ```sh
     git clone <repository_url>
-    cd leyline
+    cd LeylineTech
     ```
 
 2. **Build and start the Docker containers**:
     ```sh
+    docker-compose -f rabbitmq.yml up
     docker-compose up --build
     ```
 

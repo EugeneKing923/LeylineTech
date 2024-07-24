@@ -1,11 +1,15 @@
 "use client";
 import { useRef } from "react";
+import React from "react";
 import VideoPlayer from "./VideoPlayer";
 
-function VideoPreview({finished}) {
-  var videoSrc = `${process.env.NEXT_PUBLIC_BACKEND_URL}/video/output.m3u8`;
+interface VideoPreviewProps {
+  finished: boolean;
+}
 
-  const playerRef = useRef(null);
+const VideoPreview: React.FC<VideoPreviewProps> = (props) => {
+  var videoSrc = `${process.env.NEXT_PUBLIC_BACKEND_URL}/video/output.m3u8`;
+  const {finished} = props;
 
   const videoJsOptions = {
     autoplay: false,
@@ -20,16 +24,12 @@ function VideoPreview({finished}) {
     ],
   };
 
-  const handlePlayerReady = (player) => {
-    playerRef.current = player;
-  };
-
   return (
     <>
       <div className="flex mx-auto w-full bg-[#f0f0f0] p-[10px] h-full flex-col justify-center">
         {
             finished ? 
-            <VideoPlayer options={videoJsOptions} onReady={handlePlayerReady} /> 
+            <VideoPlayer options={videoJsOptions} /> 
             // <video controls width="100%" src={videoSrc}></video>
             :
             <h1 className="mx-auto text-xl">You can view output after generated</h1>

@@ -11,7 +11,7 @@ import {cn} from '../utils/utils';
 // @ts-ignore
 
 export default function ImageUpload({setFinished}) {
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [status, setStatus] = useState('');
   const [preview, setPreview] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
@@ -109,7 +109,7 @@ export default function ImageUpload({setFinished}) {
       >
         {selectedFile ? (
           <div>
-            <p>{selectedFile && selectedFile.name}</p>
+            <p>{selectedFile.name}</p>
             <Image src={preview} width={350} height={350} className="mx-auto" alt="file" />
           </div>
         ) : (
