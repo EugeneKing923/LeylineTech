@@ -9,7 +9,10 @@ interface VideoPreviewProps {
 
 const VideoPreview: React.FC<VideoPreviewProps> = (props) => {
   const {finished} = props;
-
+  const [hostname, setHostname] = React.useState('')
+  React.useEffect(() => {
+    setHostname(window.location.hostname)
+  }, [])
   const videoJsOptions = {
     autoplay: false,
     controls: true,
@@ -17,7 +20,7 @@ const VideoPreview: React.FC<VideoPreviewProps> = (props) => {
     fluid: true,
     sources: [
       {
-        src: `http://${window.location.hostname}:8000/video/output.m3u8`,
+        src: `http://${hostname}:8000/video/output.m3u8`,
         type: "application/x-mpegURL",
       },
     ],
