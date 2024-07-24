@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, RefObject, MutableRefObject } from "react";
 import videojs from "video.js";
 import Player from "video.js/dist/types/player";
 import "video.js/dist/video-js.css";
@@ -22,11 +22,10 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = (props : VideoPlayerProps
 
       videoElement.classList.add("vjs-big-play-centered");
       if(videoRef.current) {
-  
-        const player = videojs(videoElement, options, () => {
-          onReady && onReady(player)
-        });
-        playerRef.current = player;
+        (videoRef.current as any).appendChild(videoElement);
+        const player = (playerRef.current = videojs(videoElement, options, () => {
+          onReady && onReady(player);
+        }));
       }
 
       // You could update an existing player in the `else` block here

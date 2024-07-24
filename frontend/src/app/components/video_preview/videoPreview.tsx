@@ -14,6 +14,7 @@ const VideoPreview: React.FC<VideoPreviewProps> = (props) => {
   const playerRef = useRef<Player | null>(null);
   React.useEffect(() => {
     setHostname(window.location.hostname)
+    console.log(window.location.hostname)
   }, [])
   const videoJsOptions = {
     autoplay: false,
@@ -35,7 +36,7 @@ const VideoPreview: React.FC<VideoPreviewProps> = (props) => {
     <>
       <div className="flex mx-auto w-full bg-[#f0f0f0] p-[10px] h-full flex-col justify-center">
         {
-            finished ? 
+            finished == false ? 
             <VideoPlayer options={videoJsOptions} onReady={handlePlayerReady} /> 
             // <video controls width="100%" src={videoSrc}></video>
             :
