@@ -36,7 +36,7 @@ const VideoPreview: React.FC<VideoPreviewProps> = (props) => {
     <>
       <div className="flex mx-auto w-full bg-[#f0f0f0] p-[10px] h-full flex-col justify-center">
         {
-            finished == false ? 
+            finished ? 
             <VideoPlayer options={videoJsOptions} onReady={handlePlayerReady} /> 
             // <video controls width="100%" src={videoSrc}></video>
             :
