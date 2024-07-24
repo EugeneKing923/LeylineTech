@@ -6,12 +6,13 @@ import "video.js/dist/video-js.css";
 
 interface VideoPlayerProps {
   options: any;
+  onReady: (player:Player) => void;
 }
 
 export const VideoPlayer: React.FC<VideoPlayerProps> = (props : VideoPlayerProps) => {
   const videoRef = useRef(null);
   const playerRef = useRef<Player | null>(null);
-  const { options } = props;
+  const { options, onReady } = props;
 
   useEffect(() => {
     // Make sure Video.js player is only initialized once
@@ -22,7 +23,9 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = (props : VideoPlayerProps
       videoElement.classList.add("vjs-big-play-centered");
       if(videoRef.current) {
   
-        const player = videojs(videoElement, options, () => {});
+        const player = videojs(videoElement, options, () => {
+          onReady && onReady(player)
+        });
         playerRef.current = player;
       }
 

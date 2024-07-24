@@ -26,12 +26,15 @@ const VideoPreview: React.FC<VideoPreviewProps> = (props) => {
     ],
   };
 
+  const handlePlayerReady = (player) => {
+    playerRef.current = player;
+  };
   return (
     <>
       <div className="flex mx-auto w-full bg-[#f0f0f0] p-[10px] h-full flex-col justify-center">
         {
             finished ? 
-            <VideoPlayer options={videoJsOptions} /> 
+            <VideoPlayer options={videoJsOptions} onReady={handlePlayerReady/> 
             // <video controls width="100%" src={videoSrc}></video>
             :
             <h1 className="mx-auto text-xl">You can view output after generated</h1>
