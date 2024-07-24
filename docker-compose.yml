@@ -1,13 +1,5 @@
 version: "3"
 services:
-  rabbitmq:
-    image: "rabbitmq:3-management"
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    environment:
-      RABBITMQ_DEFAULT_USER: leyline
-      RABBITMQ_DEFAULT_PASS: leyline
   ai:
     build: AI
     network_mode: host
