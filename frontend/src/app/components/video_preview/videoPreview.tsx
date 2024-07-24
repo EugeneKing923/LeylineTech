@@ -8,7 +8,6 @@ interface VideoPreviewProps {
 }
 
 const VideoPreview: React.FC<VideoPreviewProps> = (props) => {
-  var videoSrc = `http://${window.location.hostname}:8000/video/output.m3u8`;
   const {finished} = props;
 
   const videoJsOptions = {
@@ -18,7 +17,7 @@ const VideoPreview: React.FC<VideoPreviewProps> = (props) => {
     fluid: true,
     sources: [
       {
-        src: videoSrc,
+        src: `http://${window.location.hostname}:8000/video/output.m3u8`,
         type: "application/x-mpegURL",
       },
     ],
