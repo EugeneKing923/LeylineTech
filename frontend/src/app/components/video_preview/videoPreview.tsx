@@ -8,7 +8,7 @@ interface VideoPreviewProps {
 }
 
 const VideoPreview: React.FC<VideoPreviewProps> = (props) => {
-  var videoSrc = `${process.env.NEXT_PUBLIC_BACKEND_URL}/video/output.m3u8`;
+  var videoSrc = `http://${window.location.hostname}:8000/video/output.m3u8`;
   const {finished} = props;
 
   const videoJsOptions = {
