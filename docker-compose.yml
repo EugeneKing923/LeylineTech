@@ -1,0 +1,32 @@
+version: "3"
+services:
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: leyline
+      RABBITMQ_DEFAULT_PASS: leyline
+  ai:
+    build: AI
+    network_mode: host
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: uvicorn main:app --host 0.0.0.0 --port 8001 --reload
+  backend:
+    build: backend
+    network_mode: host
+    depends_on:
+      - rabbitmq
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    build:
+      context: frontend
+    network_mode: host
+    depends_on:
+      - backend  
+  
