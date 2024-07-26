@@ -18,18 +18,16 @@
 import pika, sys, os, json
 from threading import Thread
 
-params = pika.URLParameters('amqp://leyline:leyline@localhost:5672/%2f')
-connection = pika.BlockingConnection(params)
-channel = connection.channel()
-channel.queue_declare(queue='inference')
-
 def sendTask(id) :
-    global channel
+    params = pika.URLParameters('amqp://leyline:leyline@localhost:5672/%2f')
+    connection = pika.BlockingConnection(params)
+    channel = connection.channel()
+    channel.queue_declare(queue='inference')
     channel.basic_publish(exchange='',
         routing_key='inference',
         body=id,
         properties=pika.BasicProperties(
             delivery_mode=2,  # make message persistent
         ))
-    
+    connection.close()
     
